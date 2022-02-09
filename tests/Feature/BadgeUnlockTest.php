@@ -16,11 +16,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class BadgeUnlockTest extends TestCase
 {
     use DatabaseTransactions;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function testBeginnerBadgeForLessThanFourAchievements()
     {
         Event::fake();

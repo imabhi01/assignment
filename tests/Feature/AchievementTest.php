@@ -18,11 +18,6 @@ class AchievementTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function testUserAchievementsByWritingCommentOrWatchingLesson()
     {
         $user = User::factory()->create();

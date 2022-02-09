@@ -11,14 +11,12 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Listeners\AchievementLessonWatchedListener;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LessonWatchedAchievementTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    use DatabaseTransactions;
+
     public function testAchievementAfterWatchingALesson()
     {
         $user = User::factory()->create();
@@ -82,8 +80,7 @@ class LessonWatchedAchievementTest extends TestCase
         $achievement = $user->achievements->last();
 
         Event::assertDispatched(function (AchievementUnlocked $event) use ($user, $achievement) {
-            dd($event->achievement);
-            return $event->user->id === $user->id && $event->achievement == $achievement->title;
+            return $event->user->id === $user->id && $event->achievement_name == $achievement->title;
         });
     }
 

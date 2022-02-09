@@ -2,11 +2,11 @@
 
 namespace Tests\Unit;
 
-use App\Models\User;
 use App\Models\Achievement;
-use PHPUnit\Framework\TestCase;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class AchievementTest extends TestCase
 {
@@ -19,7 +19,7 @@ class AchievementTest extends TestCase
     public function testAchievementBelongsToManyUsers()
     {
         $user = User::factory()->create();
-
+        
         $achievement = Achievement::factory()->count(2)->create([
             'achievement_type' => 'comment_written',
         ]);
