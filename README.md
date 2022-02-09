@@ -19,14 +19,14 @@ The tests provide a basic overview of the application. Some steps can be done to
     2. ```php
        $user = User::factory()->create();
 
-        Comment::factory()->count(3)->create([
-           'user_id' => $user->id,
-       ]);
-
         $user->lessons()->attach(Lesson::factory()->count(5)->create(),['watched' => true]);
+
+        Comment::factory()->count(5)->create([
+           'user_id' => $user->id,
+        ]);
         
-        php artisan sync-achievements comment_written
-        php artisan sync-achievements lesson_watched 
+        php artisan sync-achievements lesson_watched
+        php artisan sync-achievements comment_written 
        
        ```
     3. Which results in the  output for url `/users/1/achievements`
@@ -36,11 +36,12 @@ The tests provide a basic overview of the application. Some steps can be done to
                 "First Comment Written",
                 "3 Comments Written",
                 "First Lesson Watched",
-                "5 Lessons Watched"
+                "5 Lessons Watched",
+                "5 Comments Written"
             ],
             "next_available_achievements": [
                 "10 Lessons Watched",
-                "5 Comments Written"
+                "10 Comments Written"
             ],
             "current_badge": "Intermediate",
             "next_badge": "Advanced",
