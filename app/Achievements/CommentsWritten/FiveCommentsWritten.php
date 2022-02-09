@@ -15,12 +15,8 @@ class FiveCommentsWritten extends AchievementType
         parent::__construct('5 Comments Written');
     }
 
-    /**
-     * @param User $user
-     * @return bool
-     */
     public function qualify(User $user)
     {
-        return (bool) $user->comments()->count() >= 5;
+        return $user->comments()->count() >= 5;
     }
 }

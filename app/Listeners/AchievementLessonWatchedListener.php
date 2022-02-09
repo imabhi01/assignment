@@ -32,7 +32,6 @@ class AchievementLessonWatchedListener
         })->map(function ($achievement) {
             return $achievement->primaryKey();
         });
-
         $event->user->awardAchievement($achievementIdsToAward);
     }
 }

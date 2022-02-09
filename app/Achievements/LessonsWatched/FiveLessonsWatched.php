@@ -17,6 +17,6 @@ class FiveLessonsWatched extends AchievementType
 
     public function qualify(User $user)
     {
-        return (bool) $user->watched()->count() >= 5;
+        return $user->watched()->count() >= 5;
     }
 }

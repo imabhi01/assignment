@@ -11,11 +11,26 @@ class AchievementsController extends Controller
 {
     public function index(User $user)
     {
+        $nextAvailableAchievements = [];
+
         $unlockedAchievements = $user->achievements()->pluck('title');
+        
+        $nextAvailableCommentWrittenAchievement = Achievement::whereNotIn('title', $unlockedAchievements)
+            ->where('achievement_type', 'comment_written')
+            ->first();
 
-        $nextAvailableAchievements = Achievement::all()
-            ->whereNotIn('title', $unlockedAchievements)->pluck('title');
+        $nextAvailableLessonWatchedAchievement = Achievement::whereNotIn('title', $unlockedAchievements)
+            ->where('achievement_type', 'lesson_watched')
+            ->first();
+        
+        if(!is_null($nextAvailableLessonWatchedAchievement)){
+            $nextAvailableAchievements[] = $nextAvailableLessonWatchedAchievement->title;
+        }
 
+        if(!is_null($nextAvailableCommentWrittenAchievement)){
+            $nextAvailableAchievements[] = $nextAvailableCommentWrittenAchievement->title;
+        }
+        
         $badge = $user->badges->last();
 
         $nextBadge = null;
@@ -23,7 +38,7 @@ class AchievementsController extends Controller
         $remainingToUnlockNextBadge = 0;
 
         if ($badge) {
-            $nextBadge = Badge::find(++$badge->id);
+            $nextBadge = Badge::find($badge->id + 1);
             $remainingToUnlockNextBadge = is_null($nextBadge) ? 0 : $nextBadge->achievements - $badge->achievements;
         }
 

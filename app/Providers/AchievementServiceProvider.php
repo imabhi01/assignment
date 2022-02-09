@@ -18,17 +18,17 @@ use Illuminate\Support\ServiceProvider;
 class AchievementServiceProvider extends ServiceProvider
 {
     protected $achievements = [
-        FirstCommentWritten::class,
-        ThreeCommentsWritten::class,
-        FiveCommentsWritten::class,
-        TenCommentsWritten::class,
-        TwentyCommentsWritten::class,
         FirstLessonWatched::class,
         FiveLessonsWatched::class,
         TenLessonsWatched::class,
         TwentyLessonsWatched::class,
         TwentyFiveLessonsWatched::class,
-        FiftyLessonsWatched::class
+        FiftyLessonsWatched::class,
+        FirstCommentWritten::class,
+        ThreeCommentsWritten::class,
+        FiveCommentsWritten::class,
+        TenCommentsWritten::class,
+        TwentyCommentsWritten::class,
     ];
 
     /**

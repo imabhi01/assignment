@@ -17,6 +17,6 @@ class FirstLessonWatched extends AchievementType
 
     public function qualify(User $user)
     {
-        return (bool) $user->watched->count();
+        return !!$user->watched->count();
     }
 }
