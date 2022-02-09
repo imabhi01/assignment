@@ -77,8 +77,7 @@ class User extends Authenticatable
     {
         $this->achievements()->syncWithoutDetaching($achievements);
         $lastAchievement = $this->achievements->last();
-        // AchievementUnlocked::dispatch($this, $lastAchievement->name);
-
+        AchievementUnlocked::dispatch($this, $lastAchievement->title);
         return $this;
     }
 
@@ -93,7 +92,7 @@ class User extends Authenticatable
 
         $lastBadge = $this->badges->last();
 
-        BadgeUnlocked::dispatch($this, $lastBadge->name);
+        BadgeUnlocked::dispatch($this, $lastBadge->badge_name);
 
         return $this;
     }

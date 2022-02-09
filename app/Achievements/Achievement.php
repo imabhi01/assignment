@@ -13,7 +13,7 @@ abstract class Achievement
     public function __construct(string $title)
     {
         $this->model = \App\Models\Achievement::firstOrCreate([
-           'title' => $title,
+            'title' => $title,
             'achievement_type' => $this->achievementType,
         ]);
     }

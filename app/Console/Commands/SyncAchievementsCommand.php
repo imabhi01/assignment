@@ -54,7 +54,7 @@ class SyncAchievementsCommand extends Command
         if ($this->argument('achievement') == 'comment_written') {
             $users = User::whereHas('comments')->get();
         }
-        
+
         $users->each(function ($user) {
             if ($this->argument('achievement') == 'lesson_watched') {
                 LessonWatched::dispatch($user->lessons->last(), $user);

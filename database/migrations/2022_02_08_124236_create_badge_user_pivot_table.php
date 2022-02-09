@@ -16,7 +16,6 @@ class CreateBadgeUserPivotTable extends Migration
         Schema::create('badge_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('badge_id')->constrained();
-            $table->boolean('unlocked')->default(false);
         });
     }
 

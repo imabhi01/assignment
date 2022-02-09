@@ -25,9 +25,7 @@ class AchievementLessonWatchedListener
      */
     public function handle($event)
     {
-        dd(app('achievements'));
         $achievementIdsToAward = app('achievements')->filter(function ($achievement) {
-            dd($achievement);
             return $achievement->achievementType == 'lesson_watched';
         })->filter(function ($filteredAchievements) use ($event) {
             return $filteredAchievements->qualify($event->user);

@@ -16,7 +16,6 @@ class CreateAchievementUserPivotTable extends Migration
         Schema::create('achievement_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('achievement_id')->constrained();
-            $table->boolean('unlocked')->default(false);
         });
     }
 
