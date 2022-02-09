@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         AchievementUnlocked::class => [
             \App\Listeners\BadgeListener::class
+        ],
+        BadgeUnlocked::class => [
+            \App\Listeners\BadgeListener::class
         ]
     ];
 
