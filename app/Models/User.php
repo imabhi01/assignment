@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Badge;
 use App\Models\Comment;
+use App\Events\BadgeUnlocked;
+use App\Events\AchievementUnlocked;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -63,5 +66,35 @@ class User extends Authenticatable
     public function watched()
     {
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
+    }
+
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class);
+    }
+
+    public function awardAchievement($achievements)
+    {
+        $this->achievements()->syncWithoutDetaching($achievements);
+        $lastAchievement = $this->achievements->last();
+        // AchievementUnlocked::dispatch($this, $lastAchievement->name);
+
+        return $this;
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class);
+    }
+
+    public function assignBadges($badges)
+    {
+        $this->badges()->syncWithoutDetaching($badges);
+
+        $lastBadge = $this->badges->last();
+
+        BadgeUnlocked::dispatch($this, $lastBadge->name);
+
+        return $this;
     }
 }
