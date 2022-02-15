@@ -39,7 +39,7 @@ class AchievementsController extends Controller
 
         if ($badge) {
             $nextBadge = Badge::find($badge->id + 1);
-            $remainingToUnlockNextBadge = is_null($nextBadge) ? 0 : $nextBadge->achievements - $badge->achievements;
+            $remainingToUnlockNextBadge = is_null($nextBadge) ? 0 : $nextBadge->achievements - count($user->achievements);
         }
 
         return response()->json([
